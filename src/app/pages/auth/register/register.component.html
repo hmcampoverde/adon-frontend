@@ -1,0 +1,104 @@
+<div class="flex flex-column align-items-center gap-4 lg:mb-8">
+	<div class="mb-3">
+		<h1>Crear Nueva Cuenta</h1>
+		<h3>Empecemos</h3>
+		<span class="font-semibold text-color-secondary">
+			Ya tienes una cuenta?
+			<a class="text-primary hover:underline cursor-pointer font-medium" [routerLink]="['/auth/login']">
+				<b>Click aquí</b>
+			</a>
+			para ingresar
+		</span>
+	</div>
+	<form [formGroup]="form" (ngSubmit)="onSubmit()">
+		<div class="flex flex-column gap-4">
+			<span class="p-input-icon-left w-full">
+				<i class="pi pi-user"></i>
+				<input
+					autocomplete="off"
+					class="w-full md:w-25rem"
+					formControlName="firstname"
+					id="firstname"
+					placeholder="Nombres"
+					pInputText
+					type="text"
+					[class.ng-dirty]="form.get('firstname')?.touched && form.get('firstname')?.invalid" />
+			</span>
+			<span class="p-input-icon-left w-full">
+				<i class="pi pi-user"></i>
+				<input
+					autocomplete="off"
+					class="w-full md:w-25rem"
+					formControlName="lastname"
+					id="lastname"
+					placeholder="Apellidos"
+					pInputText
+					type="text"
+					[class.ng-dirty]="form.get('lastname')?.touched && form.get('lastname')?.invalid" />
+			</span>
+			<span class="p-input-icon-left w-full">
+				<i class="pi pi-user"></i>
+				<input
+					autocomplete="off"
+					class="w-full md:w-25rem"
+					formControlName="identification"
+					id="identification"
+					maxlength="11"
+					pKeyFilter="int"
+					pInputText
+					placeholder="Identificación"
+					type="text"
+					[class.ng-dirty]="form.get('identification')?.touched && form.get('identification')?.invalid" />
+			</span>
+			<span class="p-input-icon-left w-full">
+				<i class="pi pi-envelope"></i>
+				<input
+					autocomplete="off"
+					class="w-full md:w-25rem"
+					formControlName="emailInstitutional"
+					id="email"
+					pInputText
+					placeholder="Correo institucional"
+					type="text"
+					[class.ng-dirty]="form.get('emailInstitutional')?.touched && form.get('emailInstitutional')?.invalid" />
+			</span>
+			<span class="p-input-icon-left w-full">
+				<i class="pi pi-lock z-2"></i>
+				<p-password
+					formControlName="password"
+					inputId="password"
+					inputStyleClass="w-full md:w-25rem"
+					placeholder="Ingresa Password"
+					styleClass="w-full"
+					[feedback]="false"
+					[inputStyle]="{ paddingLeft: '2.5rem' }"
+					[toggleMask]="true"
+					[class.ng-dirty]="form.get('password')?.touched && form.get('password')?.invalid"></p-password>
+			</span>
+			<span class="p-input-icon-left w-full">
+				<i class="pi pi-lock z-2"></i>
+				<p-password
+					formControlName="confirmPassword"
+					inputId="confirmPassword"
+					inputStyleClass="w-full md:w-25rem"
+					placeholder="Confirme Password"
+					styleClass="w-full"
+					[feedback]="false"
+					[inputStyle]="{ paddingLeft: '2.5rem' }"
+					[toggleMask]="true"
+					[class.ng-dirty]="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.invalid"></p-password>
+			</span>
+			<button pButton pRipple label="CONTINUAR" class="w-full mb-4" type="submit" [disabled]="form.invalid"></button>
+		</div>
+	</form>
+	<div>
+		@if (form.get('password')?.hasError('password') && form.get('password')?.touched) {
+			<span class="p-error block">
+				La contraseña debe tener mínimo 8 caracteres entre letras mayúsculas, minúsculas, simbolos y números
+			</span>
+		}
+		@if (form.errors?.['passwordMatching'] && form.get('confirmPassword')?.touched) {
+			<span class="p-error block">Las contraseñas escritas no coinciden.</span>
+		}
+	</div>
+</div>

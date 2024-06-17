@@ -5,6 +5,11 @@ export const AUTH_ROUTES: Routes = [
 	{
 		path: '',
 		component: AuthComponent,
-		children: []
+		children: [
+			{
+				path: 'register',
+				loadComponent: () => import('./register/register.component').then((m) => m.RegisterComponent)
+			}
+		]
 	}
 ];
