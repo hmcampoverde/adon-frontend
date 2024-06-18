@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div class="flex flex-column align-items-center gap-4 lg:mb-8">
+		<div class="mb-3">
+			<h2>Ingrese a su cuenta</h2>
+			<p>
+				Olvido su clave?
+				<a class="text-primary hover:underline cursor-pointer font-medium" [routerLink]="['/auth/forgot']">
+					<b>Click aquí</b>
+				</a>
+				para recuperar.
+			</p>
+		</div>
+		<input
+			autocomplete="off"
+			class="w-20rem"
+			formControlName="username"
+			id="username"
+			pKeyFilter="int"
+			maxlength="10"
+			pInputText
+			placeholder="Ingrese su usuario"
+			[class.ng-dirty]="form.get('username')?.touched && form.get('username')?.invalid" />
+		<p-password
+			formControlName="password"
+			inputId="password"
+			inputStyleClass="w-20rem"
+			placeholder="Ingrese su contraseña"
+			[feedback]="false"
+			[toggleMask]="true"
+			[class.ng-dirty]="form.get('password')?.touched && form.get('password')?.invalid"></p-password>
+		<button class="w-20rem" icon="pi pi-sign-in" label="CONTINUAR" [disabled]="form.invalid" pButton></button>
+	</div>
+</form>

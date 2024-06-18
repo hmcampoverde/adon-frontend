@@ -7,6 +7,8 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { spinnerInterceptor } from '@interceptors/spinner.interceptor';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { routes } from './app.routes';
+import { addTokenInterceptor } from './core/interceptors/add-token.interceptor';
+import { refreshTokenInterceptor } from './core/interceptors/refresh-token.interceptor';
 import { AppLayoutModule } from './pages/layout/app.layout.module';
 
 export const appConfig: ApplicationConfig = {
@@ -15,7 +17,10 @@ export const appConfig: ApplicationConfig = {
 		MessageService,
 		importProvidersFrom(AppLayoutModule),
 		provideZoneChangeDetection({ eventCoalescing: true }),
-		provideHttpClient(withFetch(), withInterceptors([errorInterceptor, spinnerInterceptor])),
+		provideHttpClient(
+			withFetch(),
+			withInterceptors([addTokenInterceptor, refreshTokenInterceptor, errorInterceptor, spinnerInterceptor])
+		),
 		provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
 		{ provide: LocationStrategy, useClass: HashLocationStrategy }
 	]

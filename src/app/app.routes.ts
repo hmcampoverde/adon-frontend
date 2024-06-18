@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
+import { securityGuard } from './core/guards/security.guard';
 import { AppLayoutComponent } from './pages/layout/app.layout.component';
 
 export const routes: Routes = [
 	{
 		path: '',
 		component: AppLayoutComponent,
+		canActivateChild: [securityGuard],
 		children: [
 			{
 				path: '',
