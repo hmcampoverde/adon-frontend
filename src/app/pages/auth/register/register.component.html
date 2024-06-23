@@ -65,15 +65,15 @@
 			<span class="p-input-icon-left w-full">
 				<i class="pi pi-lock z-2"></i>
 				<p-password
-					formControlName="password"
-					inputId="password"
+					formControlName="newPassword"
+					inputId="newPassword"
 					inputStyleClass="w-full md:w-25rem"
 					placeholder="Ingresa Password"
 					styleClass="w-full"
 					[feedback]="false"
 					[inputStyle]="{ paddingLeft: '2.5rem' }"
 					[toggleMask]="true"
-					[class.ng-dirty]="form.get('password')?.touched && form.get('password')?.invalid"></p-password>
+					[class.ng-dirty]="form.get('newPassword')?.touched && form.get('newPassword')?.invalid"></p-password>
 			</span>
 			<span class="p-input-icon-left w-full">
 				<i class="pi pi-lock z-2"></i>
@@ -92,7 +92,7 @@
 		</div>
 	</form>
 	<div>
-		@if (form.get('password')?.hasError('password') && form.get('password')?.touched) {
+		@if (form.get('newPassword')?.hasError('passwordInvalid') && form.get('newPassword')?.touched) {
 			<span class="p-error block">
 				La contraseña debe tener mínimo 8 caracteres entre letras mayúsculas, minúsculas, simbolos y números
 			</span>

@@ -27,10 +27,10 @@ export class RegisterComponent {
 		{
 			firstname: this.formBuilder.control<string>('', { validators: Validators.required }),
 			lastname: this.formBuilder.control<string>('', { validators: Validators.required }),
-			identification: this.formBuilder.control<string>('', { validators: CustomValidators.identification }),
+			identification: this.formBuilder.control<string>('', { validators: CustomValidators.identificationInvalid }),
 			emailInstitutional: this.formBuilder.control<string>('', { validators: [Validators.required, Validators.email] }),
-			password: this.formBuilder.control<string>('', { validators: CustomValidators.password }),
-			confirmPassword: this.formBuilder.control<string>('', { validators: Validators.required })
+			newPassword: this.formBuilder.control<string>('', { validators: CustomValidators.passwordInvalid }),
+			confirmPassword: this.formBuilder.control<string>('')
 		},
 		{ validators: CustomValidators.passMatch as ValidatorFn }
 	);
