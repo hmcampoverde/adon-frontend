@@ -1,0 +1,31 @@
+<div class="flex flex-column align-items-center text-center p-3 py-5">
+	<img [src]="['assets/adon/images/profile/male.png']" alt="profile" class="border-circle mb-3" width="150px" />
+	<span class="font-bold">{{ profile?.firstname }} {{ profile?.lastname }}</span>
+	<span class="text-black-50">{{ profile?.emailInstitutional }}</span>
+</div>
+<div class="surface-section">
+	<ul class="list-none p-0 m-0">
+		<li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+			<div class="text-500 w-6 md:w-4 font-medium">Identificación</div>
+			<div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ profile?.identification }}</div>
+		</li>
+		<li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+			<div class="text-500 w-6 md:w-4 font-medium">Celular</div>
+			<div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+				{{ profile?.mobil }}
+			</div>
+		</li>
+		<li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+			<div class="text-500 w-6 md:w-4 font-medium">Email Personal</div>
+			<div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3">
+				{{ profile?.emailPersonal }}
+			</div>
+		</li>
+		<li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+			<div class="text-500 w-6 md:w-4 font-medium">Dirección:</div>
+			<div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+				{{ profile?.address }}
+			</div>
+		</li>
+	</ul>
+</div>
