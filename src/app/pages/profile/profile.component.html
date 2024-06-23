@@ -60,6 +60,7 @@
 								pInputText
 								pKeyFilter="int"
 								placeholder="Ingrese identificación"
+								readonly="true"
 								type="text"
 								[class.ng-dirty]="form.get('identification').touched && form.get('identification').invalid" />
 							@if (form.get('identification').touched && form.get('identification').hasError('identificationInvalid')) {
