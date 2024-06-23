@@ -27,7 +27,7 @@ export class NewpasswordComponent {
 		{
 			fullname: this.formBuilder.control<string>('', { validators: [Validators.required] }),
 			username: this.formBuilder.control<string>(''),
-			password: this.formBuilder.control<string>('', { validators: [CustomValidators.password] }),
+			newPassword: this.formBuilder.control<string>('', { validators: [CustomValidators.passwordInvalid] }),
 			confirmPassword: this.formBuilder.control<string>('', { validators: [Validators.required] })
 		},
 		{ validators: CustomValidators.passMatch as ValidatorFn }
