@@ -23,6 +23,7 @@
 		"useDefineForClassFields": false,
 		"lib": ["ES2022", "dom"],
 		"paths": {
+			"@components/*": ["src/app/shared/components/*"],
 			"@environments/*": ["src/environments/*"],
 			"@interceptors/*": ["src/app/core/interceptors/*"],
 			"@layout/*": ["src/app/pages/layout/*"],

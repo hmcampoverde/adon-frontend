@@ -10,7 +10,13 @@ export class SessionService {
 
 	get user(): User {
 		let payload = this.getPayloadDecoded();
-		return new User(JSON.parse(payload).fullname, JSON.parse(payload).sub, '', JSON.parse(payload).roles);
+		return new User(
+			JSON.parse(payload).fullname,
+			JSON.parse(payload).sub,
+			undefined,
+			undefined,
+			JSON.parse(payload).roles
+		);
 	}
 
 	private getPayloadDecoded(): string {

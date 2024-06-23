@@ -4,7 +4,7 @@ export class Register {
 		public lastname: string,
 		public identification: string,
 		public emailInstitutional: string,
-		public password: string
+		public newPassword: string
 	) {}
 
 	static build(value: any): Register {
@@ -13,7 +13,7 @@ export class Register {
 			value['lastname'],
 			value['identification'],
 			value['emailInstitutional'],
-			value['password']
+			value['newPassword']
 		);
 	}
 }

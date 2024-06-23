@@ -21,7 +21,7 @@ export class LoginComponent {
 	private loginService = inject(LoginService);
 
 	form: FormGroup = this.formBuilder.group({
-		username: this.formBuilder.control<string>('', { validators: CustomValidators.identification }),
+		username: this.formBuilder.control<string>('', { validators: CustomValidators.identificationInvalid }),
 		password: this.formBuilder.control<string>('', { validators: Validators.required })
 	});
 

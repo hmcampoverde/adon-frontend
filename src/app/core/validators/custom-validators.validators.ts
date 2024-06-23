@@ -3,18 +3,24 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 const patternPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8}/;
 
 export class CustomValidators {
-	static identification(control: AbstractControl<string>): ValidationErrors | null {
-		return !CustomValidators.identificationValidator(control.value) ? { identification: true } : null;
+	static identificationInvalid(control: AbstractControl<string>): ValidationErrors | null {
+		return !CustomValidators.identificationValidator(control.value) ? { identificationInvalid: true } : null;
 	}
 
-	static password(control: AbstractControl<string>): ValidationErrors | null {
-		return !patternPassword.test(control.value) ? { password: true } : null;
+	static passwordInvalid(control: AbstractControl<string>): ValidationErrors | null {
+		return !patternPassword.test(control.value) ? { passwordInvalid: true } : null;
 	}
 
-	static passMatch(formGroup: AbstractControl<{ password: string; confirmPassword: string }>): ValidationErrors | null {
-		const password = formGroup.value.password;
+	static passMatch(
+		formGroup: AbstractControl<{ newPassword: string; confirmPassword: string }>
+	): ValidationErrors | null {
+		const newPassword = formGroup.value.newPassword;
 		const confirmPassword = formGroup.value.confirmPassword;
-		return password !== confirmPassword ? { passwordMatching: true } : null;
+
+		if (newPassword !== confirmPassword) {
+			formGroup.get('confirmPassword').setErrors({ required: true });
+		}
+		return newPassword !== confirmPassword ? { passwordMatching: true } : null;
 	}
 
 	private static identificationValidator(identification: string): boolean {

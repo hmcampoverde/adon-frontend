@@ -32,7 +32,7 @@ export class ForgotpasswordComponent {
 	private router = inject(Router);
 
 	form: FormGroup = this.formBuilder.group({
-		username: this.formBuilder.control<string>('', { validators: [CustomValidators.identification] })
+		username: this.formBuilder.control<string>('', { validators: [CustomValidators.identificationInvalid] })
 	});
 
 	onSubmit(): void {

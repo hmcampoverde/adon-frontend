@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 	providedIn: 'root'
 })
 export class RegisterService {
-	private readonly URL: string = `${environment.HOSTNAME}/auth`;
+	private readonly URL: string = `${environment.HOSTNAME}/register`;
 	private readonly _http = inject(HttpClient);
 
 	public register(register: Register): Observable<any> {
-		return this._http.post<any>(`${this.URL}/register`, register);
+		return this._http.post<any>(`${this.URL}/`, register);
 	}
 }

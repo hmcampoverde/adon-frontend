@@ -23,5 +23,9 @@ export const AUTH_ROUTES: Routes = [
 				loadComponent: () => import('./newpassword/newpassword.component').then((c) => c.NewpasswordComponent)
 			}
 		]
+	},
+	{
+		path: 'access',
+		loadComponent: () => import('./accessdenied/accessdenied.component').then((c) => c.AccessdeniedComponent)
 	}
 ];
