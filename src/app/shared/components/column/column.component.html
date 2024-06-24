@@ -1,0 +1,7 @@
+@switch (column.type) {
+	@case ('text') {
+		<p [ngClass]="column.classField" [ngStyle]="column.styleField">
+			{{ row[column.field] }}
+		</p>
+	}
+}
