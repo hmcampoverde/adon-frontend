@@ -1,0 +1,127 @@
+<p-toolbar>
+	<ng-template pTemplate="start">
+		<p-button
+			class="mr-2"
+			icon="pi pi pi-plus"
+			label="Nuevo"
+			type="button"
+			title="Nuevo"
+			[outlined]="true"
+			(onClick)="onRowClick.emit({ action: 'create' })" />
+	</ng-template>
+
+	<ng-template pTemplate="end">
+		<app-filter
+			class="mr-1"
+			[columns]="columnsVisibles()"
+			(onKeyUp)="table.filterGlobal($event, 'contains')"
+			(onClearClick)="table.clear(); table.filterGlobal($event, 'contains')" />
+		<p-button
+			[rounded]="true"
+			[text]="true"
+			icon="pi pi-ellipsis-v"
+			type="button"
+			pTooltip="Mostrar Columnas"
+			tooltipPosition="bottom"
+			(onClick)="op.toggle($event)"></p-button>
+	</ng-template>
+</p-toolbar>
+<br />
+<p-table
+	#table
+	scrollHeight="calc(100vh - 300px)"
+	[columns]="columnsVisibles()"
+	[dataKey]="dataKey"
+	[globalFilterFields]="filterFields()"
+	[paginator]="true"
+	[rows]="10"
+	[rowHover]="true"
+	[rowsPerPageOptions]="[10, 25, 50, 100]"
+	[scrollable]="true"
+	[showCurrentPageReport]="true"
+	[tableStyle]="{ 'min-width': '70rem' }"
+	[value]="items">
+	<ng-template pTemplate="header" let-columns>
+		<tr>
+			<th id="index" class="w-5rem">Nro.</th>
+			@for (column of columns; track $index) {
+				<th
+					[id]="$index"
+					[ngClass]="column.classHeader"
+					[ngStyle]="column.styleHeader"
+					[pSortableColumn]="column.field"
+					[pSortableColumnDisabled]="!column.sort">
+					{{ column.header }}
+					@if (column.sort) {
+						<p-sortIcon [field]="column.field" />
+					}
+					@if (column.filter) {
+						<p-columnFilter [field]="column.filterField" type="text" display="menu" />
+					}
+				</th>
+			}
+			<th id="actions" class="text-center" style="min-width: 100px">Acciones</th>
+		</tr>
+	</ng-template>
+
+	<ng-template pTemplate="body" let-row let-columns="columns" let-index="rowIndex">
+		<tr>
+			<td>
+				{{ index + 1 }}
+			</td>
+			@for (column of columns; track $index) {
+				<td [ngClass]="column.classHeader" [ngStyle]="column.styleHeader">
+					<app-column [column]="column" [row]="row" [id]="$index" [type]="'table'" />
+				</td>
+			}
+			<td class="text-center" style="min-width: 100px">
+				<p-button
+					class="mr-1"
+					icon="pi pi-pencil"
+					pTooltip="Editar"
+					type="button"
+					tooltipPosition="bottom"
+					[raised]="true"
+					[rounded]="true"
+					(onClick)="onRowClick.emit({ action: 'update', item: row })" />
+				<p-button
+					class="mr-1"
+					icon="pi pi-trash"
+					pTooltip="Eliminar"
+					type="button"
+					tooltipPosition="bottom"
+					severity="danger"
+					[raised]="true"
+					[rounded]="true"
+					(onClick)="onRowClick.emit({ action: 'remove', item: row })" />
+				<button
+					#button
+					pButton
+					pRipple
+					type="button"
+					icon="pi pi-ellipsis-v"
+					class="p-button-rounded p-button-text z-3 ml-auto sm:ml-0"
+					(click)="ontoggle($event, { item: row })"
+					*ngIf="actions.length > 0"></button>
+				<p-menu #menu [popup]="true" [model]="menuItems" styleClass="w-12rem" [appendTo]="table"></p-menu>
+			</td>
+		</tr>
+	</ng-template>
+</p-table>
+
+<p-overlayPanel #op>
+	<p-listbox
+		[options]="columns"
+		[ngModel]="columnsVisibles()"
+		selectedItemsLabel="{0} columnas"
+		optionLabel="header"
+		[style]="{ width: '15rem' }"
+		[filter]="true"
+		[multiple]="true"
+		[checkbox]="true"
+		[showToggleAll]="false"
+		[metaKeySelection]="false"
+		[showToggleAll]="true"
+		(onChange)="onSelectedColumns($event.value)"
+		[listStyle]="{ 'max-height': '220px' }"></p-listbox>
+</p-overlayPanel>
