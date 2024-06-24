@@ -13,11 +13,15 @@ export const routes: Routes = [
 				data: { breadcrumb: 'Dashboard' },
 				loadChildren: () => import('./pages/dashboard/dashboard.routes').then((c) => c.DASHBOARD_ROUTES)
 			},
-
 			{
 				path: 'profile',
-				data: { breadcrumb: 'Perfil' },
+				data: { breadcrumb: 'Mi Perfil' },
 				loadChildren: () => import('./pages/profile/profile.routes').then((m) => m.PROFILE_ROUTES)
+			},
+			{
+				path: 'employee',
+				data: { breadcrumb: 'Empleado' },
+				loadChildren: () => import('./pages/employee/employee.routes').then((m) => m.EMPLOYEE_ROUTE)
 			}
 		]
 	},

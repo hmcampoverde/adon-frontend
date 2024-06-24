@@ -26,6 +26,7 @@
 			"@components/*": ["src/app/shared/components/*"],
 			"@environments/*": ["src/environments/*"],
 			"@interceptors/*": ["src/app/core/interceptors/*"],
+			"@interfaces/*": ["src/app/core/interfaces/*"],
 			"@layout/*": ["src/app/pages/layout/*"],
 			"@models/*": ["src/app/core/models/*"],
 			"@services/*": ["src/app/core/services/*"],

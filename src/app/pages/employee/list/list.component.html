@@ -1,0 +1,8 @@
+<p-card header="Lista Empleados">
+	<app-table
+		[actions]="settings.actions"
+		[columns]="settings.columns"
+		[dataKey]="settings.datakey"
+		[items]="items"
+		(onRowClick)="rowClick($event)"></app-table>
+</p-card>
