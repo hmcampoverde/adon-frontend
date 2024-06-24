@@ -1,0 +1,21 @@
+<div class="flex flex-row align-items-center">
+	<span class="block mr-2 md:mt-0 p-input-icon-left w-full md:w-25rem">
+		<i class="pi pi-search"></i>
+		<input
+			autocomplete="off"
+			class="w-full"
+			id="search"
+			pInputText
+			[placeholder]="placeholder()"
+			#textFilter
+			[title]="placeholder()"
+			type="text"
+			(input)="onKeyUp.emit($any($event.target).value)" />
+	</span>
+	<p-button
+		icon="pi pi-filter-slash"
+		pTooltip="Quitar Filtro"
+		tooltipPosition="bottom"
+		[outlined]="true"
+		(onClick)="onClearClick.emit((textFilter.value = ''))" />
+</div>
