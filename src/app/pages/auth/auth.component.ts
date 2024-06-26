@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AppConfigModule } from '@layout/config/app.config.module';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import { AppConfigModule } from '../layout/config/app.config.module';
 
 @Component({
 	selector: 'app-auth',
