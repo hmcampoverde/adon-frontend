@@ -1,0 +1,156 @@
+<form [formGroup]="form" (ngSubmit)="onSave()">
+	<p-card [header]="(creation ? 'Crear' : 'Editar') + ' Empleado'">
+		<p-panel [toggleable]="true">
+			<ng-template pTemplate="header">
+				<span class="flex align-items-center gap-2 w-full">
+					<p-avatar icon="pi pi-user" shape="circle" size="large" />
+					<span class="font-bold white-space-nowrap"> Información Personal </span>
+				</span>
+			</ng-template>
+
+			<div class="grid formgrid p-fluid">
+				<div class="field col-12 md:col-6">
+					<label for="firstname" class="font-bold block mb-2">Nombres</label>
+					<input
+						autocomplete="off"
+						formControlName="firstname"
+						id="firstname"
+						maxlength="75"
+						pInputText
+						placeholder="Ingrese nombre"
+						type="text"
+						[class.ng-dirty]="form.get('firstname').touched && form.get('firstname').invalid" />
+					@if (form.get('firstname').touched && form.get('firstname').hasError('required')) {
+						<small class="p-error block"> Campo Nombre es obligatorio</small>
+					}
+				</div>
+
+				<div class="field col-12 md:col-6">
+					<label for="lastname" class="font-bold block mb-2">Apellidos</label>
+					<input
+						autocomplete="off"
+						formControlName="lastname"
+						id="lastname"
+						maxlength="75"
+						pInputText
+						placeholder="Ingrese apellidos"
+						type="text"
+						[class.ng-dirty]="form.get('lastname').touched && form.get('lastname').invalid" />
+					@if (form.get('lastname').touched && form.get('lastname').hasError('required')) {
+						<small class="p-error block"> Campo Apellido es obligatorio</small>
+					}
+				</div>
+
+				<div class="field col-12 md:col-6">
+					<label for="identification" class="font-bold block mb-2">Identificación</label>
+					<input
+						autocomplete="off"
+						formControlName="identification"
+						id="identification"
+						maxlength="10"
+						pInputText
+						pKeyFilter="int"
+						placeholder="Ingrese identificación"
+						type="text"
+						[class.ng-dirty]="form.get('identification').touched && form.get('identification').invalid" />
+					@if (form.get('identification').touched && form.get('identification').hasError('identificationInvalid')) {
+						<small class="p-error block"> Campo Identificación es invalido</small>
+					}
+				</div>
+
+				<div class="field col-12 md:col-6">
+					<label for="mobil" class="font-bold block mb-2">Celular</label>
+					<p-inputMask
+						autocomplete="off"
+						formControlName="mobil"
+						inputId="mobil"
+						mask="(999) 999 999 999"
+						placeholder="Ingrese celular"
+						[class.ng-dirty]="form.get('mobil').touched && form.get('mobil').invalid" />
+					@if (form.get('mobil').touched && form.get('mobil').hasError('required')) {
+						<small class="p-error block"> Campo Celular es obligatorio</small>
+					}
+					<small>
+						<i class="pi pi-info-circle mr-1 vertical-align-middle"></i>
+						<span> Ejm. (593) 980 961 567 </span>
+					</small>
+				</div>
+
+				<div class="field col-12 md:col-6">
+					<label for="emailInstitutional" class="font-bold block mb-2">Email Institucional</label>
+					<input
+						autocomplete="off"
+						formControlName="emailInstitutional"
+						id="emailInstitutional"
+						maxlength="75"
+						placeholder="Ingrese email institucional"
+						pInputText
+						[class.ng-dirty]="form.get('emailInstitutional').touched && form.get('emailInstitutional').invalid" />
+					@if (form.get('emailInstitutional').touched && form.get('emailInstitutional').hasError('required')) {
+						<small class="p-error block"> Campo Email Institucional es obligatorio </small>
+					}
+					@if (form.get('emailInstitutional')?.touched && form.get('emailInstitutional')?.hasError('email')) {
+						<small class="p-error block"> Email Institucional es invalido </small>
+					}
+				</div>
+
+				<div class="field col-12 md:col-6">
+					<label for="emailPersonal" class="font-bold block mb-2">Email Personal</label>
+					<input
+						autocomplete="off"
+						formControlName="emailPersonal"
+						id="emailPersonal"
+						maxlength="75"
+						placeholder="Ingrese email personal"
+						pInputText
+						[class.ng-dirty]="form.get('emailPersonal').touched && form.get('emailPersonal').invalid" />
+					@if (form.get('emailPersonal').touched && form.get('emailPersonal').hasError('required')) {
+						<small class="p-error block"> Email Personal es obligatorio </small>
+					}
+					@if (form.get('emailPersonal').touched && form.get('emailPersonal').hasError('email')) {
+						<small class="p-error block"> Email Personal es invalido </small>
+					}
+				</div>
+
+				<div class="field col-12">
+					<label for="address" class="font-bold block mb-2">Dirección</label>
+					<input
+						autocomplete="off"
+						formControlName="address"
+						id="address"
+						placeholder="Ingrese dirección"
+						pInputText
+						[class.ng-dirty]="form.get('address')?.touched && form.get('address')?.invalid" />
+					@if (form.get('address')?.touched && form.get('address')?.hasError('required')) {
+						<small class="p-error block"> Dirección es obligatorio </small>
+					}
+				</div>
+
+				<div class="field col-12 md:col-12">
+					<label class="font-bold block mb-2" for="manager"> Coordinador/Director/Rector </label>
+					<p-inputSwitch formControlName="manager" inputId="manager"></p-inputSwitch><br />
+					<small>
+						<i class="pi pi-info-circle mr-1 vertical-align-middle"></i>
+						<span> Active esta opción si usted es Coordinador/Director/Rector de la Institución Educativa.</span>
+					</small>
+				</div>
+			</div>
+		</p-panel>
+
+		<ng-template pTemplate="footer">
+			<div class="flex align-content-start flex-wrap">
+				<p-button
+					class="mr-2"
+					icon="pi pi-plus"
+					id="reset"
+					label="Nuevo"
+					severity="secondary"
+					[routerLink]="[route + '/create']"
+					(onClick)="onReset()"
+					type="button" />
+				<p-button class="mr-2" icon="pi pi-save" label="Guardar" type="submit" [disabled]="form.invalid" />
+				<p-button icon="pi pi-times" label="Cancelar" [routerLink]="[route]" severity="danger" type="button" />
+			</div>
+		</ng-template>
+	</p-card>
+</form>
