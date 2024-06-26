@@ -11,11 +11,11 @@ export const spinnerInterceptor: HttpInterceptorFn = (request, next) => {
 		_spinnerService.show();
 	}
 
-	_activeRequest.update((value: number) => value++);
+	_activeRequest.update((value: number) => value + 1);
 
 	return next(request).pipe(
 		finalize(() => {
-			_activeRequest.update((value: number) => value--);
+			_activeRequest.update((value: number) => value - 1);
 			if (_activeRequest() === 0) {
 				setTimeout(() => _spinnerService.hide(), 200);
 			}
