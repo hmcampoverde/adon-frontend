@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, signal } from '@angular/core';
-import { ChipModule } from 'primeng/chip';
-import { Employee } from '../../../core/models/employee';
+import { Employee } from '@models/employee';
 
 @Component({
 	selector: 'app-details',
 	standalone: true,
-	imports: [ChipModule, CommonModule],
+	imports: [CommonModule],
 	templateUrl: './details.component.html'
 })
 export class DetailsComponent {

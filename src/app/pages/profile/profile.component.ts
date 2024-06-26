@@ -1,30 +1,31 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Profile } from '@models/profile';
+import { User } from '@models/user';
+import { NewPasswordService } from '@services/newpassword.service';
+import { ProfileService } from '@services/profile.service';
+import { SessionService } from '@services/session.service';
 import { CustomValidators } from '@validators/custom-validators.validators';
-import { AccordionModule } from 'primeng/accordion';
 import { Message, MessageService } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { PanelModule } from 'primeng/panel';
 import { PasswordModule } from 'primeng/password';
-import { Profile } from '../../core/models/profile';
-import { User } from '../../core/models/user';
-import { NewPasswordService } from '../../core/services/newpassword.service';
-import { ProfileService } from '../../core/services/profile.service';
-import { SessionService } from '../../core/services/session.service';
 import { DetailsComponent } from './details/details.component';
 
 @Component({
 	selector: 'app-profile',
 	standalone: true,
 	imports: [
-		AccordionModule,
 		AvatarModule,
 		ButtonModule,
+		CardModule,
 		DetailsComponent,
 		KeyFilterModule,
 		InputTextModule,
@@ -37,14 +38,15 @@ import { DetailsComponent } from './details/details.component';
 	templateUrl: './profile.component.html'
 })
 export class ProfileComponent implements OnInit {
-	private readonly formBuilder = inject(FormBuilder);
+	private readonly formBuilder = inject(NonNullableFormBuilder);
+	private router = inject(Router);
 
 	private newPasswordService = inject(NewPasswordService);
 	private messageService = inject(MessageService);
 	private profileService = inject(ProfileService);
 	private sessionService = inject(SessionService);
 
-	public form: FormGroup = this.formBuilder.nonNullable.group({
+	public form: FormGroup = this.formBuilder.group({
 		firstname: this.formBuilder.control<string>('', { validators: Validators.required }),
 		lastname: this.formBuilder.control<string>('', { validators: Validators.required }),
 		identification: this.formBuilder.control<string>('', { validators: CustomValidators.identificationInvalid }),
@@ -56,7 +58,7 @@ export class ProfileComponent implements OnInit {
 		manager: this.formBuilder.control<boolean>(false, { validators: Validators.required })
 	});
 
-	public formReset: FormGroup = this.formBuilder.nonNullable.group(
+	public formReset: FormGroup = this.formBuilder.group(
 		{
 			password: this.formBuilder.control<string>('', { validators: CustomValidators.passwordInvalid }),
 			newPassword: this.formBuilder.control<string>('', { validators: CustomValidators.passwordInvalid }),
@@ -66,9 +68,12 @@ export class ProfileComponent implements OnInit {
 	);
 
 	ngOnInit(): void {
-		this.profileService
-			.findByIdentification(this.sessionService.user.username)
-			.subscribe((profile: Profile) => this.form.patchValue(profile));
+		this.profileService.findByIdentification(this.sessionService.user.username).subscribe({
+			next: (profile: Profile) => this.form.patchValue(profile),
+			error: (response) => {
+				if (response.status === 404) this.router.navigate(['error']);
+			}
+		});
 	}
 
 	public onSubmit(): void {
