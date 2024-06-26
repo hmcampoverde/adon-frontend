@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { DefaultService } from '@services/default.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { DefaultService } from '../../../core/services/default.service';
 
 @Component({
 	selector: 'app-list',

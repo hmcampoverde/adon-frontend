@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, ViewChild, computed, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ColumnComponent } from '@components/column/column.component';
+import { FilterComponent } from '@components/filter/filter.component';
 import { Action } from '@interfaces/action';
 import { Column } from '@interfaces/column';
 import { MenuItem } from 'primeng/api';
@@ -13,8 +15,6 @@ import { Menu, MenuModule } from 'primeng/menu';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
-import { ColumnComponent } from '../column/column.component';
-import { FilterComponent } from '../filter/filter.component';
 
 @Component({
 	selector: 'app-table',
