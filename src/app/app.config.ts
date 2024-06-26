@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
 		provideZoneChangeDetection({ eventCoalescing: true }),
 		provideHttpClient(
 			withFetch(),
-			withInterceptors([addTokenInterceptor, refreshTokenInterceptor, errorInterceptor, spinnerInterceptor])
+			withInterceptors([spinnerInterceptor, addTokenInterceptor, refreshTokenInterceptor, errorInterceptor])
 		),
 		provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
 		{ provide: LocationStrategy, useClass: HashLocationStrategy }
