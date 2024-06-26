@@ -6083,6 +6083,10 @@
   padding: 0px !important;
 }
 
+.p-card .p-card-title {
+  margin: 0.7rem 0;
+}
+
 .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
   background-color: #ffcc80;
 }
