@@ -2,12 +2,14 @@ import { HttpErrorResponse, HttpInterceptorFn, HttpStatusCode } from '@angular/c
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from '@environments/environment';
 import { Token } from '@models/token';
 import { LoginService } from '@services/login.service';
 import { TokenService } from '@services/token.service';
 import { EMPTY, catchError, concatMap, finalize, throwError } from 'rxjs';
 
 export const refreshTokenInterceptor: HttpInterceptorFn = (request, next) => {
+	const URL_REFRESH: string = `${environment.HOSTNAME}/auth/refresh`;
 	const tokenService = inject(TokenService);
 	const helperService = new JwtHelperService();
 	const loginService = inject(LoginService);
@@ -27,10 +29,12 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (request, next) => {
 							tokenService.setToken(data.token);
 							return next(request.clone({ setHeaders: { authorization: `Bearer ${data.token}` } }));
 						}),
-						catchError(() => {
-							console.log('**** ERROR REFRESHING TOKEN ****');
-							loginService.logout();
-							router.navigateByUrl('/auth/login');
+						catchError((errorResponse: HttpErrorResponse) => {
+							if (errorResponse.url === URL_REFRESH) {
+								console.log('**** ERROR REFRESHING TOKEN ****');
+								loginService.logout();
+								router.navigateByUrl('/auth/login');
+							}
 							return EMPTY;
 						}),
 						finalize(() => (tokenService.isRefreshing = false))
