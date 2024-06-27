@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ListComponent as List } from '@components/list/list.component';
 import { TableComponent } from '@components/table/table.component';
 import { Employee } from '@models/employee';
@@ -12,9 +12,8 @@ import { Settings } from './employee.setting';
 	imports: [CardModule, TableComponent],
 	templateUrl: './list.component.html'
 })
-export class ListComponent extends List<Employee> implements OnInit {
+export class ListComponent extends List<Employee> {
 	public override route: string = '/employee';
-
 	public override service = inject(EmployeeService);
 	public override settings = Settings;
 }

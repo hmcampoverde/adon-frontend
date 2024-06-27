@@ -78,6 +78,17 @@ const columns: Array<Column> = [
 	},
 	{
 		index: 6,
+		header: 'Coordinador/Rector',
+		styleField: { 'min-width': '250px' },
+		field: 'manager',
+		type: 'boolean',
+		sort: false,
+		filter: false,
+		filterGlobal: false,
+		visible: true
+	},
+	{
+		index: 7,
 		header: 'Dirección',
 		styleField: { 'min-width': '250px' },
 		field: 'address',

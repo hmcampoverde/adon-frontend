@@ -90,7 +90,7 @@
 						<small class="p-error block"> Campo Email Institucional es obligatorio </small>
 					}
 					@if (form.get('emailInstitutional')?.touched && form.get('emailInstitutional')?.hasError('email')) {
-						<small class="p-error block"> Email Institucional es invalido </small>
+						<small class="p-error block"> Campo Email Institucional es invalido </small>
 					}
 				</div>
 
@@ -105,10 +105,10 @@
 						pInputText
 						[class.ng-dirty]="form.get('emailPersonal').touched && form.get('emailPersonal').invalid" />
 					@if (form.get('emailPersonal').touched && form.get('emailPersonal').hasError('required')) {
-						<small class="p-error block"> Email Personal es obligatorio </small>
+						<small class="p-error block"> Campo Email Personal es obligatorio </small>
 					}
 					@if (form.get('emailPersonal').touched && form.get('emailPersonal').hasError('email')) {
-						<small class="p-error block"> Email Personal es invalido </small>
+						<small class="p-error block"> Campo Email Personal es invalido </small>
 					}
 				</div>
 
@@ -122,7 +122,7 @@
 						pInputText
 						[class.ng-dirty]="form.get('address')?.touched && form.get('address')?.invalid" />
 					@if (form.get('address')?.touched && form.get('address')?.hasError('required')) {
-						<small class="p-error block"> Dirección es obligatorio </small>
+						<small class="p-error block"> Campo Dirección es obligatorio </small>
 					}
 				</div>
 
@@ -144,7 +144,6 @@
 					icon="pi pi-plus"
 					id="reset"
 					label="Nuevo"
-					severity="secondary"
 					[routerLink]="[route + '/create']"
 					(onClick)="onReset()"
 					type="button" />
