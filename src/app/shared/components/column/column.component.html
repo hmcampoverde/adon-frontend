@@ -4,4 +4,39 @@
 			{{ row[column.field] }}
 		</p>
 	}
+
+	@case ('model') {
+		<p [ngClass]="column.classField">{{ row | model: column.field }}</p>
+	}
+
+	@case ('date') {
+		<p [ngClass]="column.classField">{{ row[column.field] | date: 'dd/MM/YYYY' }}</p>
+	}
+
+	@case ('datetime') {
+		<p [ngClass]="column.classField">{{ row[column.field] | date: 'dd-MM-YYYY hh:HH:ss a' }}</p>
+	}
+
+	@case ('icon') {
+		<i [ngClass]="column.classField" [class]="'pi pi-' + row[column.field]"></i>
+	}
+
+	@case ('color') {
+		<div [ngClass]="'flex ' + column.classField">
+			<div [ngStyle]="{ width: '35px', height: '20px', background: row[column.field] }"></div>
+		</div>
+	}
+
+	@case ('badge') {
+		<span [ngClass]="row['styleBadge']">{{ row[column.field] }}</span>
+	}
+
+	@case ('boolean') {
+		<p [ngClass]="column.classField">
+			<p-inputSwitch
+				[inputId]="'visibility-' + row['id']"
+				[ngModel]="row[column.field]"
+				[readonly]="true"></p-inputSwitch>
+		</p>
+	}
 }
