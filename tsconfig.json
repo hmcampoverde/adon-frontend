@@ -28,6 +28,7 @@
 			"@interceptors/*": ["src/app/core/interceptors/*"],
 			"@interfaces/*": ["src/app/core/interfaces/*"],
 			"@layout/*": ["src/app/pages/layout/*"],
+			"@pipes/*": ["src/app/core/pipes/*"],
 			"@models/*": ["src/app/core/models/*"],
 			"@services/*": ["src/app/core/services/*"],
 			"@validators/*": ["src/app/core/validators/*"]

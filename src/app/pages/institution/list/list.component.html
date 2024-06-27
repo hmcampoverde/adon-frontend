@@ -1,0 +1,8 @@
+<p-card header="Lista Instituciones">
+	<app-table
+		[actions]="settings.actions"
+		[columns]="settings.columns"
+		[dataKey]="settings.dataKey"
+		[items]="items"
+		(onRowClick)="rowClick($event)" />
+</p-card>

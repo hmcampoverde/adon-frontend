@@ -22,6 +22,11 @@ export const routes: Routes = [
 				path: 'employee',
 				data: { breadcrumb: 'Empleado' },
 				loadChildren: () => import('./pages/employee/employee.routes').then((m) => m.EMPLOYEE_ROUTE)
+			},
+			{
+				path: 'institution',
+				data: { breadcrumb: 'Institución' },
+				loadChildren: () => import('./pages/institution/institution.routes').then((m) => m.INSTITUTION_ROUTE)
 			}
 		]
 	},
@@ -29,6 +34,7 @@ export const routes: Routes = [
 		path: 'auth',
 		loadChildren: () => import('./pages/auth/auth.routes').then((m) => m.AUTH_ROUTES)
 	},
+	{ path: 'error', loadChildren: () => import('./pages/error/error.routes').then((m) => m.ERROR_ROUTES) },
 	{ path: 'notfound', loadChildren: () => import('./pages/notfound/notfound.routes').then((m) => m.NOTFOUND_ROUTES) },
 	{ path: '**', redirectTo: '/notfound' }
 ];
