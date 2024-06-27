@@ -5,6 +5,7 @@ import { SaveComponent as Save } from '@components/save/save.component';
 import { Employee } from '@models/employee';
 import { EmployeeService } from '@services/employee.service';
 import { CustomValidators } from '@validators/custom-validators.validators';
+import { AccordionModule } from 'primeng/accordion';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -17,6 +18,7 @@ import { PanelModule } from 'primeng/panel';
 	selector: 'app-save',
 	standalone: true,
 	imports: [
+		AccordionModule,
 		AvatarModule,
 		ButtonModule,
 		CardModule,
